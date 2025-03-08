@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày 8/3</title>
+    <style>
+        :root {
+            --primary-color: #ff4b8d;
+            --secondary-color: #ff6b6b;
+            --bg-gradient: linear-gradient(135deg, #ffd1ff, #fbc2eb);
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            border-radius: clamp(20px, 4vw, 30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: min(95%, 800px);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            transform: scaleX(0);
+            animation: underline 1s ease forwards;
+        }
+
+        @keyframes underline {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .form-container {
+            margin-bottom: 1.5rem;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .form-container.hide {
+            transform: translateY(-30px) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        input {
+            width: min(80%, 400px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ffd1ff;
+            border-radius: 15px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(255, 75, 141, 0.2);
+            transform: scale(1.02);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 75, 141, 0.4);
+        }
+
+        .message {
+            display: none;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            color: var(--primary-color);
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 209, 255, 0.95));
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-content {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            padding: 10px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .message.show .message-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .message-header {
+            font-size: 1.2em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 75, 141, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .message-body {
+            line-height: 1.6;
+            display: grid;
+            gap: 10px;
+        }
+
+        .message-footer {
+            font-style: italic;
+            font-size: 0.9em;
+            padding-top: 10px;
+            border-top: 2px solid rgba(255, 75, 141, 0.2);
+            margin-top: 10px;
+        }
+
+        .highlight-text {
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+            padding: 0 5px;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: clamp(20px, 3vw, 25px);
+            color: var(--primary-color);
+            pointer-events: none;
+            z-index: 0;
+            filter: drop-shadow(0 0 5px rgba(255, 75, 141, 0.3));
+        }
+
+        .sakura {
+            position: absolute;
+            width: clamp(12px, 1.5vw, 18px);
+            height: clamp(12px, 1.5vw, 18px);
+            background: #ffd1ff;
+            border-radius: 12px 1px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: translateZ(0) rotate(0deg) scale(1);
+            }
+
+            100% {
+                top: 110%;
+                transform: translateZ(0) rotate(360deg) scale(1);
+            }
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 0;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .envelope.show {
+            height: auto;
+            padding-top: 20px;
+        }
+
+        .envelope-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform-origin: top;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-radius: 10px;
+        }
+
+        .envelope.open .envelope-front {
+            transform: rotateX(-180deg);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.2rem;
+                width: 95%;
+            }
+
+            .message-header {
+                font-size: 1.1em;
+            }
+
+            .message-body {
+                font-size: 0.9em;
+            }
+
+            .message-footer {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌸 Chúc Mừng Ngày 8/3 🌸</h1>
+        <div class="form-container" id="formContainer">
+            <input type="text" id="userName" placeholder="Nhập tên của bạn..." required>
+            <button onclick="showMessage()">Gửi Lời Chúc</button>
+        </div>
+        <div class="envelope" id="envelope">
+            <div class="envelope-front"></div>
+            <div id="greetingMessage" class="message">
+                <div class="message-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.className = 'sakura';
+            sakura.style.left = Math.random() * window.innerWidth + 'px';
+            sakura.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(sakura);
+            setTimeout(() => sakura.remove(), 7000);
+        }
+
+        function createHeart(x, y, scale = 1) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'heart';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.transform = `scale(${scale})`;
+            heart.style.animation = `floatHeart ${Math.random() * 2 + 2}s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        function createHeartBurst(x, y) {
+            const count = 8;
+            const radius = 100;
+            for (let i = 0; i < count; i++) {
+                const angle = (i / count) * Math.PI * 2;
+                const heartX = x + Math.cos(angle) * radius;
+                const heartY = y + Math.sin(angle) * radius;
+                setTimeout(() => createHeart(heartX, heartY, 0.8), i * 100);
+            }
+            createHeart(x, y, 1.2);
+        }
+
+        setInterval(createSakura, 300);
+
+        function showMessage() {
+            const userName = document.getElementById('userName').value.trim();
+            if (userName) {
+                const formContainer = document.getElementById('formContainer');
+                const envelope = document.getElementById('envelope');
+                const message = document.getElementById('greetingMessage');
+                const messageContent = message.querySelector('.message-content');
+
+                formContainer.classList.add('hide');
+                envelope.classList.add('show');
+
+                setTimeout(() => {
+                    messageContent.innerHTML = `
+                        <div class="message-header">
+                            ✨ Chúc mừng ngày Quốc tế Phụ nữ 8/3! ✨
+                        </div>
+                        <div class="message-body">
+                            <div>Kính chúc <span class="highlight-text">${userName}</span></div>
+                            <div>một ngày tràn ngập niềm vui và hạnh phúc! 🌹</div>
+                            <div>Chúc bạn luôn xinh đẹp, rạng rỡ và thành công!</div>
+                            <div>Mọi ước mơ sẽ thành hiện thực! 💖</div>
+                        </div>
+                        <div class="message-footer">
+                            "Phụ nữ là để yêu thương và trân trọng" 🌸
+                        </div>
+                    `;
+                    message.classList.add('show');
+                    envelope.classList.add('open');
+
+                    const rect = message.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    createHeartBurst(centerX, centerY);
+
+                    setInterval(() => {
+                        if (Math.random() > 0.7) {
+                            const x = Math.random() * window.innerWidth;
+                            const y = Math.random() * window.innerHeight;
+                            createHeartBurst(x, y);
+                        }
+                    }, 3000);
+                }, 500);
+            }
+        }
+
+        document.getElementById('userName').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                showMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>
